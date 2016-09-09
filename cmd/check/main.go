@@ -119,7 +119,8 @@ func fetchDigest(client *http.Client, manifestURL string) (string, bool) {
 
 	defer manifestResponse.Body.Close()
 
-	if manifestResponse.StatusCode == http.StatusNotFound {
+	if manifestResponse.StatusCode == http.StatusNotFound ||
+		manifestResponse.StatusCode == http.StatusInternalServerError {
 		return "", false
 	}
 
